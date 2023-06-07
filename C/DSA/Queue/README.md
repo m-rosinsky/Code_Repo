@@ -12,6 +12,10 @@ The queue holds references to equeued data, but is not responsible for allocated
 
 See `main.c` for example program.
 
+## Dependencies
+
+None
+
 ## Code Standards
 
 This code follows Barr-C coding standards with Doxygen-style comments.
