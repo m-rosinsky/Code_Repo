@@ -1,5 +1,5 @@
 /*!
- * @file threadpool.h
+ * @file threadpool.c
  *
  * @brief This file contains a generic threadpool implementation.
  *
@@ -10,12 +10,6 @@
  *          When the threadpool is destroyed, threads will be allowed
  *              to finish out any work on the job queue, then be
  *              joined to the main thread for destruction.
- *
- *          Functions included are as follows:
- *
- *              - threadpool_create
- *              - threadpool_destroy
- *              - threadpool_enq
  */
 
 #include "threadpool.h"
@@ -109,7 +103,6 @@ threadpool_inactive (void * vp_tp)
  *
  * @return Pointer to new threadpool context. NULL on error.
  */
-#include <stdio.h>
 threadpool_t *
 threadpool_create (const size_t num_threads)
 {
@@ -153,7 +146,6 @@ threadpool_create (const size_t num_threads)
         {
             goto EXIT;
         }
-        printf("[+] CREATED THREAD [%lu]\n", tid);
     }
     
     status = 0;
@@ -205,7 +197,6 @@ threadpool_destroy (threadpool_t * p_tp)
         {
             goto EXIT;
         }
-        printf("[+] JOINED THREAD [%ld]\n", tid);
     }
     
     // Free the array containing the threads.
