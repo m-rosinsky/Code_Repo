@@ -2,16 +2,16 @@
 
 This contains a generic threadpool implementation.
 
-### About
+## About
 
 This threadpool is designed to create a set number of threads upon instantiation.
 
 Upon cleanup, the threadpool allows any jobs still remaining on its queue to be completed before memory is cleaned up and threads are joined.
 
-### Usage
+## Usage
 
 See `main.c` for example program.
 
-### Code Style
+## Code Style
 
 All code follows Barr-C coding standards with Doxygen commenting.
