@@ -12,6 +12,10 @@ Upon cleanup, the threadpool allows any jobs still remaining on its queue to be 
 
 See `main.c` for example program.
 
+## Dependencies
+
+- queue (See C/DSA/Queue)
+
 ## Code Style
 
 All code follows Barr-C coding standards with Doxygen commenting.
