@@ -6,7 +6,7 @@ This directory contains a generic queue implementation written in C.
 
 This implementation uses a singly linked-list to implement a generic queue data structure.
 
-The queue holds references to equeued data, but is not responsible for allocated/deallocating said references.
+The queue holds references to enqueued data, but is not responsible for allocated/deallocating said references.
 
 ## Usage
 
