@@ -4,4 +4,5 @@ This directory holds commonly used data structures written in C.
 
 ### Currently Implemented
 
-- queue
+- Queue
+- Vector
