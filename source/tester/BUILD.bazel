@@ -1,0 +1,7 @@
+cc_binary(
+    name = "tester",
+    srcs = ["tester.c"],
+    deps = [
+        "//src/c/queue:queue",
+    ],
+)
