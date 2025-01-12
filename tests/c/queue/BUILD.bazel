@@ -1,0 +1,10 @@
+cc_test(
+    name = "queue",
+    size = "small",
+    srcs = ["test_queue.c"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/c/ctest",
+        "//src/c/queue",
+    ],
+)

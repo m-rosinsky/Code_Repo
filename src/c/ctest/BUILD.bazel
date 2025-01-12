@@ -1,0 +1,6 @@
+cc_library(
+    name = "ctest",
+    srcs = ["ctest.c"],
+    hdrs = ["ctest.h"],
+    visibility = ["//visibility:public"],
+)
