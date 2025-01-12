@@ -1,4 +1,4 @@
-# Code_Repo / C / Threadpool
+# Code_Repo / src / c / threadpool
 
 This contains a generic threadpool implementation.
 
@@ -14,7 +14,7 @@ See `main.c` for example program.
 
 ## Dependencies
 
-- queue (See C/DSA/Queue)
+- `src/c/queue`
 
 ## Code Style
 

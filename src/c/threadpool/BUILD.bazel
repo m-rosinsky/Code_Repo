@@ -1,0 +1,9 @@
+cc_library(
+    name = "threadpool",
+    srcs = ["threadpool.c"],
+    hdrs = ["threadpool.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/c/queue",
+    ],
+)

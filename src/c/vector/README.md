@@ -1,4 +1,4 @@
-# Code_Repo / C / DSA / Vector
+# Code_Repo / src / c / vector
 
 This directory contains a generic vector implementation written in C.
 

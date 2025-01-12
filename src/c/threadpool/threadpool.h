@@ -26,7 +26,7 @@
 #include <stdatomic.h>
 #include <stdbool.h>
 
-#include "queue.h"
+#include "src/c/queue/queue.h"
 
 /*!
  * @brief This datatype defines a threadpool context.

@@ -1,41 +1,89 @@
+/*!
+ * @project C/Threadpool
+ *
+ * @desc This project is a generic threadpool implementation.
+ *
+ *          The threadpool is designed to create a set number of threads
+ *              upon instantiation, and maintains a queue of jobs
+ *              that are passed off to any available threads.
+ *
+ *          When the threadpool is destroyed, threads will be allowed
+ *              to finish out any work on the job queue, then be
+ *              joined to the main thread for destruction.
+ */
+
 #include <stdio.h>
-#include "src/c/queue/queue.h"
+#include <stdatomic.h>
+#include <stdbool.h>
+#include <unistd.h>
+
+#include "src/c/threadpool/threadpool.h"
+
+#define NUM_THREADS 3
 
 void
-print_queue (queue_t * p_q)
+calc_double (_Atomic bool * pb_shutdown, void * p_arg)
 {
-    queue_node_t * p_node = p_q->p_head;
+    int * p_i = (int *) p_arg;
+    printf("%d * 2 = %d\n", *p_i, (*p_i) * 2);
+    sleep(1);
+    return;
+}
 
-    printf("[");
-    while (NULL != p_node)
+void sleep_inf (_Atomic bool * pb_shutdown, void * p_arg)
+{
+    while (false == *pb_shutdown)
     {
-        printf("%d", * (int *)(p_node->p_data));
-        if (NULL != p_node->p_next)
-        {
-            printf(", ");
-        }
-        p_node = p_node->p_next;
+        printf("SLEEPY\n");
+        sleep(1);
     }
-    printf("]\n");
+    printf("AWAKE!\n");
+    return;
 }
 
 int
-main (void)
+main ()
 {
-    queue_t * p_q = queue_create();
-
-    int nums[5] = {1,2,3,4,5};
-    for (size_t i = 0; i < 5; ++i)
+    // Create threadpool.
+    threadpool_t * p_tp = threadpool_create(NUM_THREADS);
+    if (NULL == p_tp)
     {
-        if (-1 == queue_enq(p_q, nums + i))
+        printf("create\n");
+        return 1;
+    }
+    
+    // Enqueue jobs.
+    int nums[10] = {1,2,3,4,5,6,7,8,9,10};
+    for (size_t i = 0; i < 10; ++i)
+    {
+        if (-1 == threadpool_enq(p_tp, (job_f) calc_double, nums + i))
         {
             printf("enq\n");
             return 1;
         }
     }
-
-    print_queue(p_q);
-
-    queue_destroy(p_q);
+    
+    for (size_t i = 0; i < 10; ++i)
+    {
+        if (-1 == threadpool_enq(p_tp, (job_f) sleep_inf, NULL))
+        {
+            printf("enq\n");
+            return 1;
+        }
+    }
+    
+    sleep(5);
+    
+    // Destroy the threadpool.
+    if (-1 == threadpool_destroy(p_tp))
+    {
+        printf("destroy\n");
+        return 1;
+    }
+    p_tp = NULL;
+    
+    printf("success\n");
     return 0;
 }
+
+/***   end of file   ***/

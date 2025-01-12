@@ -1,0 +1,6 @@
+cc_library(
+    name = "vector",
+    srcs = ["vector.c"],
+    hdrs = ["vector.h"],
+    visibility = ["//visibility:public"],
+)
